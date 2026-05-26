@@ -1,0 +1,187 @@
+---
+// SkillsSection — íconos via cdn.simpleicons.org/{slug}/{hexcolor}
+// Los SVGs se colorean automáticamente con el color del acento de cada categoría.
+
+interface Skill {
+  name:  string;
+  icon:  string; // slug de simpleicons.org
+}
+
+interface Category {
+  id:          string;
+  label:       string;
+  iconColor:   string; // hex sin '#'
+  borderClass: string;
+  labelClass:  string;
+  dotClass:    string;
+  skills:      Skill[];
+}
+
+const categories: Category[] = [
+  {
+    id:          'backend',
+    label:       'BACKEND',
+    iconColor:   '00f0ff',
+    borderClass: 'border-cybercyan/20 hover:border-cybercyan/60',
+    labelClass:  'text-cybercyan/60',
+    dotClass:    'bg-cybercyan',
+    skills: [
+      { name: 'Python',      icon: 'python'       },
+      { name: 'FastAPI',     icon: 'fastapi'      },
+      { name: 'Node.js',     icon: 'nodedotjs'    },
+      { name: 'Express',     icon: 'express'      },
+      { name: 'Socket.IO',   icon: 'socketdotio'  },
+    ],
+  },
+  {
+    id:          'frontend',
+    label:       'FRONTEND',
+    iconColor:   'ff0055',
+    borderClass: 'border-cybermagenta/20 hover:border-cybermagenta/60',
+    labelClass:  'text-cybermagenta/60',
+    dotClass:    'bg-cybermagenta',
+    skills: [
+      { name: 'React 18',     icon: 'react'       },
+      { name: 'Astro',        icon: 'astro'        },
+      { name: 'TypeScript',   icon: 'typescript'   },
+      { name: 'Tailwind CSS', icon: 'tailwindcss'  },
+      { name: 'Vite',         icon: 'vite'         },
+    ],
+  },
+  {
+    id:          'mobile',
+    label:       'MOBILE / ANDROID',
+    iconColor:   'fcee0a',
+    borderClass: 'border-cyberyellow/20 hover:border-cyberyellow/60',
+    labelClass:  'text-cyberyellow/60',
+    dotClass:    'bg-cyberyellow',
+    skills: [
+      { name: 'Kotlin',       icon: 'kotlin'      },
+      { name: 'Android',      icon: 'android'     },
+      { name: 'Gradle',       icon: 'gradle'      },
+    ],
+  },
+  {
+    id:          'database',
+    label:       'DATABASE',
+    iconColor:   '00f0ff',
+    borderClass: 'border-cybercyan/20 hover:border-cybercyan/60',
+    labelClass:  'text-cybercyan/60',
+    dotClass:    'bg-cybercyan',
+    skills: [
+      { name: 'PostgreSQL',   icon: 'postgresql'  },
+      { name: 'MariaDB',      icon: 'mariadb'     },
+      { name: 'SQLite',       icon: 'sqlite'      },
+      { name: 'SQLAlchemy',   icon: 'sqlalchemy'  },
+    ],
+  },
+  {
+    id:          'infra',
+    label:       'INFRA / OPS',
+    iconColor:   'ff0055',
+    borderClass: 'border-cybermagenta/20 hover:border-cybermagenta/60',
+    labelClass:  'text-cybermagenta/60',
+    dotClass:    'bg-cybermagenta',
+    skills: [
+      { name: 'Linux',        icon: 'linux'       },
+      { name: 'Nginx',        icon: 'nginx'       },
+      { name: 'Docker',       icon: 'docker'      },
+      { name: 'Git',          icon: 'git'         },
+      { name: 'GitHub',       icon: 'github'      },
+    ],
+  },
+];
+---
+
+<section
+  id="skills"
+  class="px-6 md:px-16 lg:px-32 py-24 max-w-6xl mx-auto"
+  aria-labelledby="skills-title"
+>
+  <!-- Header terminal -->
+  <div class="flex items-center gap-4 mb-12">
+    <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_03</span>
+    <div class="h-px flex-1 bg-gradient-to-r from-cybercyan/30 to-transparent"></div>
+  </div>
+
+  <h2
+    id="skills-title"
+    class="font-orbitron font-bold text-3xl sm:text-4xl text-white mb-3"
+  >
+    SKILL <span class="text-cybercyan">MATRIX</span>
+  </h2>
+  <p class="font-mono text-sm text-white/40 mb-12">
+    Stack tecnológico cargado y operativo.
+    <span class="text-cybercyan animate-blink">_</span>
+  </p>
+
+  <!-- Grid de categorías -->
+  <div class="space-y-10">
+    {categories.map((cat) => (
+      <div>
+        <!-- Label de categoría -->
+        <div class="flex items-center gap-3 mb-4">
+          <span class={`w-1.5 h-1.5 rounded-full ${cat.dotClass}`}></span>
+          <span class={`font-mono text-xs tracking-[0.25em] uppercase ${cat.labelClass}`}>
+            // {cat.label}
+          </span>
+          <div class="h-px flex-1 bg-white/5"></div>
+        </div>
+
+        <!-- Grid de skills -->
+        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+          {cat.skills.map((skill) => (
+            <div
+              class={`
+                group relative flex flex-col items-center justify-center gap-2
+                p-3 border bg-cyberdim/60 cyber-cut-sm
+                transition-all duration-200 cursor-default
+                ${cat.borderClass}
+              `}
+              title={skill.name}
+            >
+              <!-- Glow hover overlay -->
+              <div
+                class="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200"
+                style={`background: radial-gradient(ellipse at 50% 30%, rgba(${
+                  cat.iconColor === '00f0ff' ? '0,240,255' :
+                  cat.iconColor === 'ff0055' ? '255,0,85' :
+                  '252,238,10'
+                },0.08) 0%, transparent 70%);`}
+                aria-hidden="true"
+              ></div>
+
+              <!-- Ícono desde Simple Icons CDN -->
+              <img
+                src={`https://cdn.simpleicons.org/${skill.icon}/${cat.iconColor}`}
+                alt={skill.name}
+                width="28"
+                height="28"
+                loading="lazy"
+                class="w-7 h-7 opacity-70 group-hover:opacity-100 transition-opacity duration-200"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+
+              <!-- Fallback si el ícono no carga -->
+              <span
+                class="w-7 h-7 hidden items-center justify-center font-mono text-xs font-bold"
+                style={`color: #${cat.iconColor};`}
+                aria-hidden="true"
+              >
+                {skill.name.slice(0, 2).toUpperCase()}
+              </span>
+
+              <!-- Nombre del skill -->
+              <span
+                class="font-mono text-[10px] text-white/50 group-hover:text-white/90 text-center leading-tight transition-colors duration-200 w-full truncate"
+                style={`--hover-color: #${cat.iconColor};`}
+              >
+                {skill.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

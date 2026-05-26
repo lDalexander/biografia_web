@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import SkillsSection from '../components/SkillsSection.astro';
 import { getCollection } from 'astro:content';
 
 // Query a la Content Collection — solo proyectos featured primero
@@ -9,13 +10,6 @@ const projects = allProjects.sort(
   (a, b) => Number(b.data.featured) - Number(a.data.featured)
 );
 
-const skills = [
-  { cat: 'BACKEND',   items: ['Python', 'FastAPI', 'Node.js', 'Express', 'SQLAlchemy'] },
-  { cat: 'FRONTEND',  items: ['React 18', 'Astro', 'Vite', 'Tailwind CSS', 'TypeScript'] },
-  { cat: 'MOBILE',    items: ['Kotlin', 'Android Nativo', 'Coroutines', 'Room / SQLite'] },
-  { cat: 'INFRA/OPS', items: ['Linux', 'Nginx', 'systemd', 'MariaDB', 'PostgreSQL', 'Docker'] },
-  { cat: 'HARDWARE',  items: ['ZKTeco SDK', 'ESC/POS', 'WebSockets', 'Socket.IO'] },
-];
 ---
 
 <Layout
@@ -158,59 +152,35 @@ const skills = [
         SOBRE <span class="text-cybercyan">MÍ</span>
       </h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-        <!-- Texto -->
-        <div class="space-y-4 font-mono text-sm text-white/65 leading-relaxed">
-          <p>
-            Desarrollo software para entornos donde la fiabilidad no es
-            negociable. Mi foco es la arquitectura desde primeros principios:
-            entender el problema real antes de elegir las herramientas.
-          </p>
-          <p>
-            Actualmente trabajo como <span class="text-cybercyan">Analista TI en DETCUADOR S.A.</span>,
-            donde diseño e implemento sistemas que van desde la integración
-            con hardware biométrico y térmico hasta APIs de coordinación para
-            líneas de producción industrial.
-          </p>
-          <p>
-            Estudiante de formación técnica en el <span class="text-cyberyellow">SENA</span>,
-            complementando la experiencia práctica con fundamentos teóricos
-            en redes, seguridad y desarrollo de software.
-          </p>
-          <p>
-            Cuando el WiFi falla, el sistema sigue funcionando.
-            Cuando el servidor reinicia, los datos no se pierden.
-            Eso es lo que construyo.
-          </p>
-        </div>
-
-        <!-- Skills grid tipo terminal -->
-        <div class="space-y-4">
-          {skills.map((group) => (
-            <div>
-              <p class="font-mono text-xs text-cybercyan/60 tracking-widest uppercase mb-2">
-                // {group.cat}
-              </p>
-              <div class="flex flex-wrap gap-1.5">
-                {group.items.map((item) => (
-                  <span class="
-                    font-mono text-xs px-2 py-0.5
-                    border border-white/10 text-white/50
-                    bg-white/[0.03]
-                    hover:border-cybercyan/40 hover:text-cybercyan/80
-                    transition-colors duration-200
-                    cyber-cut-sm
-                  ">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+      <div class="max-w-2xl space-y-4 font-mono text-sm text-white/65 leading-relaxed">
+        <p>
+          Desarrollo software para entornos donde la fiabilidad no es
+          negociable. Mi foco es la arquitectura desde primeros principios:
+          entender el problema real antes de elegir las herramientas.
+        </p>
+        <p>
+          Actualmente trabajo como <span class="text-cybercyan">Analista TI en DETCUADOR S.A.</span>,
+          donde diseño e implemento sistemas que van desde la integración
+          con hardware biométrico y térmico hasta APIs de coordinación para
+          líneas de producción industrial.
+        </p>
+        <p>
+          Estudiante de formación técnica en el <span class="text-cyberyellow">SENA</span>,
+          complementando la experiencia práctica con fundamentos teóricos
+          en redes, seguridad y desarrollo de software.
+        </p>
+        <p>
+          Cuando el WiFi falla, el sistema sigue funcionando.
+          Cuando el servidor reinicia, los datos no se pierden.
+          Eso es lo que construyo.
+        </p>
       </div>
     </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SKILLS
+    ══════════════════════════════════════════════════ -->
+    <SkillsSection />
 
     <!-- ══════════════════════════════════════════════════
          PROYECTOS
@@ -222,7 +192,7 @@ const skills = [
     >
       <!-- Header de sección -->
       <div class="flex items-center gap-4 mb-12">
-        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_03</span>
+        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_04</span>
         <div class="h-px flex-1 bg-gradient-to-r from-cybercyan/30 to-transparent"></div>
       </div>
 
@@ -272,7 +242,7 @@ const skills = [
       aria-labelledby="contact-title"
     >
       <div class="flex items-center gap-4 mb-12">
-        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_04</span>
+        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_05</span>
         <div class="h-px flex-1 bg-gradient-to-r from-cybercyan/30 to-transparent"></div>
       </div>
 
