@@ -29,11 +29,11 @@
   const FPS_TARGET  = 28;
   const FRAME_DELAY = 1000 / FPS_TARGET;
 
-  // Colores del sistema de diseño
-  const COLOR_HEAD   = '#00f0ff'; // cabeza de columna — neón pleno
-  const COLOR_MID    = 'rgba(0,240,255,0.55)';
-  const COLOR_TAIL   = 'rgba(0,240,255,0.15)';
-  const BG_FADE      = 'rgba(5,5,10,0.07)'; // trail fade — no clearRect
+  // Colores del sistema de diseño — intensidad reducida para no saturar
+  const COLOR_HEAD   = 'rgba(0,240,255,0.35)'; // cabeza de columna — neón suave
+  const COLOR_MID    = 'rgba(0,240,255,0.15)';
+  const COLOR_TAIL   = 'rgba(0,240,255,0.05)';
+  const BG_FADE      = 'rgba(5,5,10,0.15)'; // trail fade más rápido = menos ruido visual
 
   let columns: number[] = [];
   let drops:   number[] = [];
@@ -69,13 +69,10 @@
       const y = drops[i] * FONT_SIZE;
 
       if (y > 0) {
-        // Carácter cabeza — máximo brillo
+        // Carácter cabeza — brillo contenido, sin glow para reducir saturación visual
         ctx.fillStyle = COLOR_HEAD;
-        ctx.shadowColor = '#00f0ff';
-        ctx.shadowBlur  = 8;
         const headChar = CHARS[Math.floor(Math.random() * CHARS.length)];
         ctx.fillText(headChar, i * FONT_SIZE, y);
-        ctx.shadowBlur = 0;
 
         // Carácter cuerpo — mid fade
         if (drops[i] > 2) {
