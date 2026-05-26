@@ -1,0 +1,345 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// Query a la Content Collection — solo proyectos featured primero
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort(
+  (a, b) => Number(b.data.featured) - Number(a.data.featured)
+);
+
+const skills = [
+  { cat: 'BACKEND',   items: ['Python', 'FastAPI', 'Node.js', 'Express', 'SQLAlchemy'] },
+  { cat: 'FRONTEND',  items: ['React 18', 'Astro', 'Vite', 'Tailwind CSS', 'TypeScript'] },
+  { cat: 'MOBILE',    items: ['Kotlin', 'Android Nativo', 'Coroutines', 'Room / SQLite'] },
+  { cat: 'INFRA/OPS', items: ['Linux', 'Nginx', 'systemd', 'MariaDB', 'PostgreSQL', 'Docker'] },
+  { cat: 'HARDWARE',  items: ['ZKTeco SDK', 'ESC/POS', 'WebSockets', 'Socket.IO'] },
+];
+---
+
+<Layout
+  title="John Garcia — Full-Stack Developer & Analista TI"
+  description="Portafolio de John Garcia. Full-Stack Developer, Analista TI y estudiante SENA. Sistemas Android nativos, APIs Python, IoT industrial y aplicaciones corporativas en producción real."
+>
+  <!-- ══════════════════════════════════════════════════
+       NAVBAR
+  ══════════════════════════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 border-b border-cybercyan/10 bg-cyberbg/80 backdrop-blur-sm">
+    <a href="/" class="font-orbitron text-sm font-bold text-cybercyan text-glow-cyan tracking-widest">
+      JG<span class="text-white/40">_SYS</span>
+    </a>
+    <div class="flex items-center gap-6">
+      <a href="#about"    class="font-mono text-xs text-white/50 hover:text-cybercyan transition-colors duration-200 tracking-wider uppercase">About</a>
+      <a href="#projects" class="font-mono text-xs text-white/50 hover:text-cybercyan transition-colors duration-200 tracking-wider uppercase">Projects</a>
+      <a href="#contact"  class="font-mono text-xs text-white/50 hover:text-cybercyan transition-colors duration-200 tracking-wider uppercase">Contact</a>
+    </div>
+  </nav>
+
+  <main class="pt-16">
+
+    <!-- ══════════════════════════════════════════════════
+         HERO SECTION
+    ══════════════════════════════════════════════════ -->
+    <section
+      id="hero"
+      class="
+        relative min-h-screen flex flex-col justify-center
+        px-6 md:px-16 lg:px-32
+        bg-cyber-grid bg-grid
+      "
+      aria-labelledby="hero-title"
+    >
+      <!-- Gradiente radial sutil detrás del texto -->
+      <div
+        class="absolute inset-0 pointer-events-none"
+        style="background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,240,255,0.04) 0%, transparent 70%);"
+        aria-hidden="true"
+      ></div>
+
+      <div class="relative max-w-4xl">
+
+        <!-- Label de sistema -->
+        <div class="font-mono text-xs text-cybercyan/60 tracking-[0.3em] uppercase mb-6 animate-slide-right">
+          // INITIALIZING_PROFILE :: USER_01
+        </div>
+
+        <!-- Nombre principal -->
+        <h1
+          id="hero-title"
+          class="
+            font-orbitron font-black leading-none tracking-tight mb-2
+            text-5xl sm:text-7xl lg:text-8xl
+            text-white text-glow-cyan
+          "
+          style="animation: slide-up 0.6s ease-out forwards;"
+        >
+          JOHN
+          <br />
+          <span class="text-cybercyan">GARCIA</span>
+        </h1>
+
+        <!-- Rol con separadores tipo terminal -->
+        <div class="font-mono text-base sm:text-xl text-white/70 mb-6 flex flex-wrap items-center gap-2">
+          <span class="text-cybercyan/50">[</span>
+          <span>Full-Stack Developer</span>
+          <span class="text-cybercyan/30">|</span>
+          <span>Analista TI</span>
+          <span class="text-cybercyan/30">|</span>
+          <span>SENA</span>
+          <span class="text-cybercyan/50">]</span>
+        </div>
+
+        <!-- Frase de impacto Sci-Fi -->
+        <p class="
+          font-mono text-sm sm:text-base text-white/50 max-w-xl leading-relaxed mb-8
+          border-l-2 border-cybercyan/40 pl-4
+        ">
+          Construyendo infraestructura de software que opera donde otros
+          sistemas fallan — entornos offline, hardware industrial y
+          producción 24/7.
+        </p>
+
+        <!-- Badge animado SYSTEM: ONLINE -->
+        <div class="flex flex-wrap gap-4 items-center">
+          <div class="
+            inline-flex items-center gap-2
+            px-4 py-2
+            border border-cybercyan/60 bg-cybercyan/5
+            font-mono text-xs text-cybercyan tracking-widest
+            cyber-cut animate-pulse-glow
+          ">
+            <span class="w-2 h-2 rounded-full bg-cybercyan animate-pulse"></span>
+            SYSTEM: ONLINE // IN_PRODUCTION
+          </div>
+
+          <a
+            href="#projects"
+            class="
+              inline-flex items-center gap-2
+              px-4 py-2
+              border border-white/20 bg-white/5
+              font-mono text-xs text-white/70 tracking-widest
+              cyber-cut
+              hover:border-cybercyan/60 hover:text-cybercyan hover:bg-cybercyan/5
+              transition-all duration-200
+            "
+          >
+            VIEW_PROJECTS →
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
+        <span class="font-mono text-[10px] text-cybercyan tracking-widest uppercase">SCROLL</span>
+        <div class="w-px h-12 bg-gradient-to-b from-cybercyan to-transparent"></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SOBRE MÍ
+    ══════════════════════════════════════════════════ -->
+    <section
+      id="about"
+      class="px-6 md:px-16 lg:px-32 py-24 max-w-6xl mx-auto"
+      aria-labelledby="about-title"
+    >
+      <!-- Header de sección estilo terminal -->
+      <div class="flex items-center gap-4 mb-12">
+        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_02</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-cybercyan/30 to-transparent"></div>
+      </div>
+
+      <h2
+        id="about-title"
+        class="font-orbitron font-bold text-3xl sm:text-4xl text-white mb-8"
+      >
+        SOBRE <span class="text-cybercyan">MÍ</span>
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+        <!-- Texto -->
+        <div class="space-y-4 font-mono text-sm text-white/65 leading-relaxed">
+          <p>
+            Desarrollo software para entornos donde la fiabilidad no es
+            negociable. Mi foco es la arquitectura desde primeros principios:
+            entender el problema real antes de elegir las herramientas.
+          </p>
+          <p>
+            Actualmente trabajo como <span class="text-cybercyan">Analista TI en DETCUADOR S.A.</span>,
+            donde diseño e implemento sistemas que van desde la integración
+            con hardware biométrico y térmico hasta APIs de coordinación para
+            líneas de producción industrial.
+          </p>
+          <p>
+            Estudiante de formación técnica en el <span class="text-cyberyellow">SENA</span>,
+            complementando la experiencia práctica con fundamentos teóricos
+            en redes, seguridad y desarrollo de software.
+          </p>
+          <p>
+            Cuando el WiFi falla, el sistema sigue funcionando.
+            Cuando el servidor reinicia, los datos no se pierden.
+            Eso es lo que construyo.
+          </p>
+        </div>
+
+        <!-- Skills grid tipo terminal -->
+        <div class="space-y-4">
+          {skills.map((group) => (
+            <div>
+              <p class="font-mono text-xs text-cybercyan/60 tracking-widest uppercase mb-2">
+                // {group.cat}
+              </p>
+              <div class="flex flex-wrap gap-1.5">
+                {group.items.map((item) => (
+                  <span class="
+                    font-mono text-xs px-2 py-0.5
+                    border border-white/10 text-white/50
+                    bg-white/[0.03]
+                    hover:border-cybercyan/40 hover:text-cybercyan/80
+                    transition-colors duration-200
+                    cyber-cut-sm
+                  ">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         PROYECTOS
+    ══════════════════════════════════════════════════ -->
+    <section
+      id="projects"
+      class="px-6 md:px-16 lg:px-32 py-24 max-w-6xl mx-auto"
+      aria-labelledby="projects-title"
+    >
+      <!-- Header de sección -->
+      <div class="flex items-center gap-4 mb-12">
+        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_03</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-cybercyan/30 to-transparent"></div>
+      </div>
+
+      <h2
+        id="projects-title"
+        class="font-orbitron font-bold text-3xl sm:text-4xl text-white mb-3"
+      >
+        PROYECTOS <span class="text-cybercyan">EN PRODUCCIÓN</span>
+      </h2>
+      <p class="font-mono text-sm text-white/40 mb-12">
+        Sistemas reales, datos reales, entornos hostiles.
+        <span class="text-cybercyan animate-blink">_</span>
+      </p>
+
+      <!-- Grid de tarjetas — query de Content Collection -->
+      {projects.length > 0 ? (
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          {projects.map((project) => (
+            <ProjectCard
+              title={project.data.title}
+              slug={project.data.slug}
+              status={project.data.status}
+              summary={project.data.summary}
+              problem={project.data.problem}
+              stack={project.data.stack}
+              features={project.data.features}
+              metrics={project.data.metrics}
+              category={project.data.category}
+              year={project.data.year}
+              featured={project.data.featured}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="font-mono text-sm text-white/30 text-center py-16 border border-white/10 cyber-cut">
+          // NO_PROJECTS_LOADED — Verifica src/content/projects/
+        </div>
+      )}
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         CONTACTO
+    ══════════════════════════════════════════════════ -->
+    <section
+      id="contact"
+      class="px-6 md:px-16 lg:px-32 py-24 max-w-6xl mx-auto"
+      aria-labelledby="contact-title"
+    >
+      <div class="flex items-center gap-4 mb-12">
+        <span class="font-mono text-xs text-cybercyan/50 tracking-widest">// SECTION_04</span>
+        <div class="h-px flex-1 bg-gradient-to-r from-cybercyan/30 to-transparent"></div>
+      </div>
+
+      <h2
+        id="contact-title"
+        class="font-orbitron font-bold text-3xl sm:text-4xl text-white mb-8"
+      >
+        CONTACTO <span class="text-cybercyan">/ CANAL</span>
+      </h2>
+
+      <div
+        class="
+          max-w-xl border border-cybercyan/20 bg-cyberdim/60
+          p-8 cyber-cut space-y-4
+        "
+      >
+        <p class="font-mono text-xs text-cybercyan/60 tracking-widest uppercase">
+          // OPEN_CHANNEL :: READY_TO_RECEIVE
+        </p>
+
+        <p class="font-mono text-sm text-white/60 leading-relaxed">
+          ¿Proyecto complejo? ¿Sistema que necesita funcionar offline,
+          integrarse con hardware o escalar sin fricción? Hablemos.
+        </p>
+
+        <div class="space-y-2 pt-2">
+          <a
+            href="mailto:agarcia@detcuador.com"
+            class="
+              flex items-center gap-3 font-mono text-sm
+              text-cybercyan/80 hover:text-cybercyan
+              transition-colors duration-200 group
+            "
+          >
+            <span class="text-cybercyan/40 group-hover:text-cybercyan transition-colors">▸</span>
+            agarcia@detcuador.com
+          </a>
+          <a
+            href="https://github.com/johngarcia"
+            rel="noopener noreferrer"
+            target="_blank"
+            class="
+              flex items-center gap-3 font-mono text-sm
+              text-white/50 hover:text-cybercyan
+              transition-colors duration-200 group
+            "
+          >
+            <span class="text-cybercyan/40 group-hover:text-cybercyan transition-colors">▸</span>
+            github.com/johngarcia
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════════ -->
+    <footer class="px-6 md:px-16 lg:px-32 py-8 border-t border-white/5">
+      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <span class="font-mono text-xs text-white/20">
+          © {new Date().getFullYear()} John Garcia — Todos los derechos reservados.
+        </span>
+        <span class="font-mono text-xs text-cybercyan/30 tracking-widest">
+          BUILT_WITH :: ASTRO + TAILWIND + CANVAS
+        </span>
+      </div>
+    </footer>
+
+  </main>
+</Layout>

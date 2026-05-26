@@ -1,0 +1,197 @@
+---
+interface Props {
+  title:    string;
+  slug:     string;
+  status:   'ONLINE' | 'IN_DEV' | 'ARCHIVED';
+  summary:  string;
+  problem:  string;
+  stack:    string[];
+  features: string[];
+  metrics:  string[];
+  category: string;
+  year:     number;
+  featured: boolean;
+}
+
+const {
+  title,
+  slug,
+  status,
+  summary,
+  problem,
+  stack,
+  features,
+  metrics,
+  category,
+  year,
+  featured,
+} = Astro.props;
+
+const statusColors = {
+  ONLINE:   { bg: 'bg-cybercyan/10',     text: 'text-cybercyan',     border: 'border-cybercyan',     dot: 'bg-cybercyan'     },
+  IN_DEV:   { bg: 'bg-cyberyellow/10',   text: 'text-cyberyellow',   border: 'border-cyberyellow',   dot: 'bg-cyberyellow'   },
+  ARCHIVED: { bg: 'bg-cybermagenta/10',  text: 'text-cybermagenta',  border: 'border-cybermagenta',  dot: 'bg-cybermagenta'  },
+} as const;
+
+const sc = statusColors[status];
+---
+
+<article
+  class="
+    group relative cyber-cut
+    bg-cyberdim/90 border border-cybercyan/20
+    p-6 transition-all duration-300
+    hover:border-cybercyan/70 hover:bg-cyberdim
+  "
+  style="
+    box-shadow: inset 0 0 30px rgba(0,240,255,0.03);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  "
+  data-project={slug}
+>
+  <!-- Hover glow overlay -->
+  <div
+    class="
+      absolute inset-0 opacity-0 group-hover:opacity-100
+      pointer-events-none transition-opacity duration-300
+    "
+    style="
+      background: radial-gradient(ellipse at 50% 0%, rgba(0,240,255,0.08) 0%, transparent 70%);
+      filter: blur(1px);
+    "
+    aria-hidden="true"
+  ></div>
+
+  <!-- Corner accent top-right -->
+  <div
+    class="absolute top-0 right-0 w-4 h-4 bg-cybercyan/60 group-hover:bg-cybercyan transition-colors duration-300"
+    style="clip-path: polygon(100% 0, 0 0, 100% 100%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Corner accent bottom-left -->
+  <div
+    class="absolute bottom-0 left-0 w-4 h-4 bg-cybercyan/30 group-hover:bg-cybercyan/70 transition-colors duration-300"
+    style="clip-path: polygon(0 0, 0 100%, 100% 100%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- ── Header terminal ───────────────────────────── -->
+  <header class="mb-4">
+    <!-- Log header label -->
+    <div class="flex items-center justify-between mb-3 gap-2 flex-wrap">
+      <span class="font-mono text-xs text-cybercyan/60 tracking-widest uppercase">
+        // DATA_LOG :: {category}
+      </span>
+      <span class="font-mono text-xs text-white/30">{year}</span>
+    </div>
+
+    <!-- Status badge -->
+    <div class="flex items-center gap-3 mb-3 flex-wrap">
+      <span
+        class={`
+          inline-flex items-center gap-1.5 px-2.5 py-0.5
+          ${sc.bg} ${sc.text} ${sc.border}
+          border font-mono text-xs font-semibold tracking-widest
+          cyber-cut-sm
+        `}
+      >
+        <span class={`w-1.5 h-1.5 rounded-full ${sc.dot} animate-pulse`}></span>
+        [{status}]
+      </span>
+
+      {featured && (
+        <span class="
+          inline-flex items-center gap-1 px-2 py-0.5
+          bg-cyberyellow/10 text-cyberyellow border border-cyberyellow/40
+          font-mono text-xs tracking-widest cyber-cut-sm
+        ">
+          ★ FEATURED
+        </span>
+      )}
+    </div>
+
+    <!-- Título -->
+    <h2
+      class="
+        font-orbitron font-bold text-lg leading-snug text-white
+        group-hover:text-cybercyan transition-colors duration-300
+        text-glow-cyan opacity-0
+      "
+      style="animation: slide-up 0.5s ease-out forwards;"
+    >
+      {title}
+    </h2>
+  </header>
+
+  <!-- ── Resumen ───────────────────────────────────── -->
+  <section class="mb-4">
+    <p class="font-mono text-sm text-white/70 leading-relaxed">
+      {summary}
+    </p>
+  </section>
+
+  <!-- ── Problema ─────────────────────────────────── -->
+  <section class="mb-4 border-l-2 border-cybermagenta/50 pl-3">
+    <p class="font-mono text-xs text-cybermagenta/80 mb-1 tracking-wider uppercase">
+      // PROBLEM_STATEMENT
+    </p>
+    <p class="font-mono text-xs text-white/60 leading-relaxed">
+      {problem}
+    </p>
+  </section>
+
+  <!-- ── Features ─────────────────────────────────── -->
+  <section class="mb-4">
+    <p class="font-mono text-xs text-cybercyan/70 mb-2 tracking-wider uppercase">
+      // KEY_FEATURES
+    </p>
+    <ul class="space-y-1">
+      {features.map((f) => (
+        <li class="font-mono text-xs text-white/60 flex items-start gap-2">
+          <span class="text-cybercyan/70 mt-0.5 shrink-0">▸</span>
+          <span>{f}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- ── Métricas ──────────────────────────────────── -->
+  <section class="mb-5">
+    <p class="font-mono text-xs text-cyberyellow/70 mb-2 tracking-wider uppercase">
+      // METRICS_OUTPUT
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+      {metrics.map((m) => (
+        <div class="
+          font-mono text-xs text-cyberyellow/90
+          bg-cyberyellow/5 border border-cyberyellow/20
+          px-2 py-1 cyber-cut-sm
+        ">
+          › {m}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Stack ─────────────────────────────────────── -->
+  <footer>
+    <p class="font-mono text-xs text-white/30 mb-2 tracking-wider uppercase">
+      // TECH_STACK
+    </p>
+    <div class="flex flex-wrap gap-1.5">
+      {stack.map((tech) => (
+        <span class="
+          font-mono text-xs px-2 py-0.5
+          bg-cybercyan/5 text-cybercyan/70
+          border border-cybercyan/20
+          hover:border-cybercyan/60 hover:text-cybercyan
+          transition-colors duration-200
+          cyber-cut-sm
+        ">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </footer>
+</article>

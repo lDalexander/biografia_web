@@ -1,0 +1,108 @@
+---
+// CyberBackground: canvas fijo en z-0 con efecto Matrix de lluvia de datos digital.
+// Sin frameworks JS — Vanilla JS puro. Optimizado para ~30fps con requestAnimationFrame.
+---
+
+<canvas
+  id="cyber-bg-canvas"
+  class="fixed inset-0 w-full h-full pointer-events-none"
+  style="z-index: 0;"
+  aria-hidden="true"
+></canvas>
+
+<script>
+(function () {
+  const canvas = document.getElementById('cyber-bg-canvas') as HTMLCanvasElement;
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Charset: katakana + hex + binario + símbolos técnicos
+  const CHARS =
+    'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ' +
+    '0123456789ABCDEF' +
+    '01' +
+    '<>/{}[]|\\#@!?%&*+-=';
+
+  const FONT_SIZE   = 13;
+  const FPS_TARGET  = 28;
+  const FRAME_DELAY = 1000 / FPS_TARGET;
+
+  // Colores del sistema de diseño
+  const COLOR_HEAD   = '#00f0ff'; // cabeza de columna — neón pleno
+  const COLOR_MID    = 'rgba(0,240,255,0.55)';
+  const COLOR_TAIL   = 'rgba(0,240,255,0.15)';
+  const BG_FADE      = 'rgba(5,5,10,0.07)'; // trail fade — no clearRect
+
+  let columns: number[] = [];
+  let drops:   number[] = [];
+  let lastFrame = 0;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const cols = Math.floor(canvas.width / FONT_SIZE);
+
+    // Preservar estado de columnas existentes al redimensionar
+    const prev = drops.slice();
+    columns = Array.from({ length: cols }, (_, i) => i);
+    drops   = Array.from({ length: cols }, (_, i) =>
+      i < prev.length ? prev[i] : Math.floor(Math.random() * -(canvas.height / FONT_SIZE))
+    );
+  }
+
+  function draw(ts: number) {
+    requestAnimationFrame(draw);
+
+    if (ts - lastFrame < FRAME_DELAY) return;
+    lastFrame = ts;
+
+    // Capa semitransparente para el efecto trail (persistencia)
+    ctx.fillStyle = BG_FADE;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = `${FONT_SIZE}px 'JetBrains Mono', monospace`;
+
+    for (let i = 0; i < drops.length; i++) {
+      const y = drops[i] * FONT_SIZE;
+
+      if (y > 0) {
+        // Carácter cabeza — máximo brillo
+        ctx.fillStyle = COLOR_HEAD;
+        ctx.shadowColor = '#00f0ff';
+        ctx.shadowBlur  = 8;
+        const headChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+        ctx.fillText(headChar, i * FONT_SIZE, y);
+        ctx.shadowBlur = 0;
+
+        // Carácter cuerpo — mid fade
+        if (drops[i] > 2) {
+          ctx.fillStyle = COLOR_MID;
+          const bodyChar = CHARS[Math.floor(Math.random() * CHARS.length)];
+          ctx.fillText(bodyChar, i * FONT_SIZE, y - FONT_SIZE);
+        }
+      }
+
+      // Avanzar la gota o reiniciar aleatoriamente
+      if (y > canvas.height && Math.random() > 0.975) {
+        drops[i] = Math.floor(Math.random() * -20); // reset con delay aleatorio
+      } else {
+        drops[i]++;
+      }
+    }
+  }
+
+  // Inicializar y arrancar
+  resize();
+  requestAnimationFrame(draw);
+
+  // Debounce del resize para evitar recalcular en cada pixel
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resize, 150);
+  });
+})();
+</script>
