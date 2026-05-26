@@ -1,6 +1,5 @@
 ---
 title: "SIGAC — Sistema de Gestión de Acceso al Comedor"
-slug: "sigac"
 status: "ONLINE"
 category: "Corporate / IoT"
 year: 2026

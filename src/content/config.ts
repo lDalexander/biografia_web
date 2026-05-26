@@ -4,7 +4,6 @@ const projects = defineCollection({
   type: 'content',
   schema: z.object({
     title:       z.string(),
-    slug:        z.string(),
     status:      z.enum(['ONLINE', 'IN_DEV', 'ARCHIVED']),
     summary:     z.string(),
     problem:     z.string(),

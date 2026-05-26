@@ -1,6 +1,5 @@
 ---
 title: "SIGEP — Sistema Integrado de Gestión de Empaque y Producción"
-slug: "sigep"
 status: "ONLINE"
 category: "Enterprise / Industrial"
 year: 2024
