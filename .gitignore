@@ -27,3 +27,9 @@ Thumbs.db
 *.ntvs*
 *.njsproj
 *.sln
+
+# Documentación interna — no subir al repositorio
+RESUMEN.md
+
+# Carpeta de imágenes fuente (las imágenes finales van en public/img/)
+img/
