@@ -2,7 +2,7 @@
 title: "SIGAC — Sistema de Gestión de Acceso al Comedor"
 status: "ONLINE"
 category: "Corporate / IoT"
-year: 2026
+year: 2025
 featured: true
 summary: "Sistema corporativo 24/7 para control de acceso al comedor de DETCUADOR S.A. mediante biometría ZKTeco. Reemplazó un proceso manual en papel, eliminando fraudes y automatizando el flujo de ~140 empleados en tres turnos."
 problem: "El control de almuerzos se gestionaba en papel de forma manual, sin auditoría ni trazabilidad. Esto generaba fraudes por registro duplicado y consumía tiempo administrativo considerable en la reconciliación diaria."
