@@ -2,7 +2,7 @@
 title: "SIGEP — Sistema Integrado de Gestión de Empaque y Producción"
 status: "ONLINE"
 category: "Enterprise / Industrial"
-year: 2024
+year: 2026
 featured: true
 summary: "Aplicación empresarial Android para coordinación de líneas de empaque en planta manufacturera de productos de limpieza. Opera en entornos con conectividad intermitente mediante arquitectura offline-first."
 problem: "El registro de producción se realizaba íntegramente en papel, sin trazabilidad en tiempo real ni visibilidad del estado de los lotes entre turnos. El entorno WiFi de planta es intermitente, lo que hacía inviable una solución puramente online."
