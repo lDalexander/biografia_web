@@ -2,7 +2,7 @@
 title: "Zyncro Abastecimiento — Sistema de Inteligencia de Inventario"
 status: "ONLINE"
 category: "Enterprise / Logistics"
-year: 2025
+year: 2026
 featured: true
 summary: "Sistema full-stack de inteligencia de inventario y abastecimiento logístico para empresa industrial. Monitorea ~500 SKUs en tiempo casi-real, calcula puntos de reorden con estadística aplicada y proyecta cuándo y cuánto comprar antes de que ocurra un quiebre de stock. Integra un ERP corporativo (MBA3), API propia, dashboard web y app móvil."
 problem: "El ERP corporativo registra datos pero no proyecta ni alerta: vigilar manualmente cientos de insumos es inviable. Los quiebres de stock detienen producción; el exceso inmoviliza capital. Se necesitaba visibilidad centralizada, alertas automáticas y respuestas claras a '¿qué está por faltar?', '¿cuánto pido?' y '¿cuándo lo pido?'."
