@@ -147,33 +147,105 @@ const projects = allProjects.sort(
 
       <h2
         id="about-title"
-        class="font-orbitron font-bold text-3xl sm:text-4xl text-white mb-8"
+        class="font-orbitron font-bold text-3xl sm:text-4xl text-white mb-10"
       >
         SOBRE <span class="text-cybercyan">MÍ</span>
       </h2>
 
-      <div class="max-w-2xl space-y-4 font-mono text-sm text-white/65 leading-relaxed">
-        <p>
-          Desarrollo software para entornos donde la fiabilidad no es
-          negociable. Mi foco es la arquitectura desde primeros principios:
-          entender el problema real antes de elegir las herramientas.
-        </p>
-        <p>
-          Actualmente trabajo como <span class="text-cybercyan">Analista TI en DETCUADOR S.A.</span>,
-          donde diseño e implemento sistemas que van desde la integración
-          con hardware biométrico y térmico hasta APIs de coordinación para
-          líneas de producción industrial.
-        </p>
-        <p>
-          Estudiante de formación técnica en el <span class="text-cyberyellow">SENA</span>,
-          complementando la experiencia práctica con fundamentos teóricos
-          en redes, seguridad y desarrollo de software.
-        </p>
-        <p>
-          Cuando el WiFi falla, el sistema sigue funcionando.
-          Cuando el servidor reinicia, los datos no se pierden.
-          Eso es lo que construyo.
-        </p>
+      <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-12 items-start">
+
+        <!-- Foto con marco cyberpunk -->
+        <div class="flex flex-col items-center lg:items-start gap-4">
+          <div class="relative group w-52 shrink-0">
+            <!-- Marco exterior con glow -->
+            <div
+              class="absolute -inset-[3px] bg-gradient-to-br from-cybercyan via-cybermagenta to-cyberyellow opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+              style="clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));"
+              aria-hidden="true"
+            ></div>
+
+            <!-- Contenedor de la foto -->
+            <div
+              class="relative overflow-hidden bg-cyberdim"
+              style="clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));"
+            >
+              <img
+                src="/img/FOTO-FRENTE.jpg"
+                alt="John Garcia — Full-Stack Developer"
+                width="208"
+                height="260"
+                class="w-full object-cover object-top grayscale-[20%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                loading="eager"
+              />
+              <!-- Overlay de scanlines sobre la foto -->
+              <div
+                class="absolute inset-0 pointer-events-none opacity-20"
+                style="background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,240,255,0.08) 3px, rgba(0,240,255,0.08) 4px);"
+                aria-hidden="true"
+              ></div>
+              <!-- Gradiente inferior -->
+              <div
+                class="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+                style="background: linear-gradient(to top, rgba(5,5,10,0.7), transparent);"
+                aria-hidden="true"
+              ></div>
+            </div>
+
+            <!-- Acento esquina superior derecha -->
+            <div class="absolute top-0 right-0 w-5 h-5 bg-cybercyan group-hover:bg-cyberyellow transition-colors duration-300"
+              style="clip-path: polygon(100% 0, 0 0, 100% 100%);" aria-hidden="true"></div>
+            <!-- Acento esquina inferior izquierda -->
+            <div class="absolute bottom-0 left-0 w-5 h-5 bg-cybermagenta/80"
+              style="clip-path: polygon(0 0, 0 100%, 100% 100%);" aria-hidden="true"></div>
+          </div>
+
+          <!-- Label bajo la foto -->
+          <div class="font-mono text-[10px] text-cybercyan/50 tracking-[0.2em] uppercase text-center lg:text-left">
+            // JOHN_GARCIA.jpg<br/>
+            <span class="text-white/30">ECUADOR — {new Date().getFullYear()}</span>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="space-y-4 font-mono text-sm text-white/65 leading-relaxed">
+          <p>
+            Desarrollo software para entornos donde la fiabilidad no es
+            negociable. Mi foco es la arquitectura desde primeros principios:
+            entender el problema real antes de elegir las herramientas.
+          </p>
+          <p>
+            Actualmente trabajo como <span class="text-cybercyan">Analista TI en DETCUADOR S.A.</span>,
+            donde diseño e implemento sistemas que van desde la integración
+            con hardware biométrico y térmico hasta APIs de coordinación para
+            líneas de producción industrial.
+          </p>
+          <p>
+            Estudiante de formación técnica en el <span class="text-cyberyellow">SENA</span>,
+            complementando la experiencia práctica con fundamentos teóricos
+            en redes, seguridad y desarrollo de software.
+          </p>
+          <p>
+            Cuando el WiFi falla, el sistema sigue funcionando.
+            Cuando el servidor reinicia, los datos no se pierden.
+            Eso es lo que construyo.
+          </p>
+
+          <!-- Datos rápidos tipo terminal -->
+          <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {[
+              { label: 'UBICACIÓN',  value: 'Ecuador 🇪🇨'         },
+              { label: 'ROL',        value: 'Full-Stack + Analista TI' },
+              { label: 'FORMACIÓN',  value: 'SENA'                },
+              { label: 'STATUS',     value: 'Disponible'          },
+            ].map(item => (
+              <div class="flex gap-2 text-xs border border-white/5 bg-white/[0.02] px-3 py-2 cyber-cut-sm">
+                <span class="text-cybercyan/50 shrink-0">{item.label}:</span>
+                <span class="text-white/70">{item.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
 
